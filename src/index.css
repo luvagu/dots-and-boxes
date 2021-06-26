@@ -65,6 +65,12 @@ button.selected {
 	margin-bottom: 1rem;
 }
 
+.min-score-txt {
+	text-align: center;
+	margin-bottom: 1rem;
+	font-size: small;
+}
+
 .board {
 	display: flex;
 	flex-direction: column;
@@ -78,8 +84,9 @@ button.selected {
 }
 
 .dot {
-	height: 5px;
-	width: 5px;
+	height: 8px;
+	width: 8px;
+	border-radius: 4px;
 	background-color: black;
 }
 
@@ -89,15 +96,15 @@ button.selected {
 }
 
 .horizontalLine {
-	height: 5px;
+	height: 8px;
 	width: 30px;
-	border: 2px;
+	border-radius: 4px;
 	cursor: pointer;
 }
 
 .verticalLine {
 	height: 30px;
-	width: 5px;
-	border: 2px;
+	width: 8px;
+	border-radius: 4px;
 	cursor: pointer;
 }

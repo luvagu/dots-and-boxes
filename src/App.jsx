@@ -306,6 +306,7 @@ const App = () => {
 					: `${capitalize(currentTurn)}'s turn`}
 			</div>
 			<div className='board'>{makeBoard(currentBoardSize)}</div>
+			<div className='min-score-txt'>Board min. score to win: {Math.ceil((board.boardSize ** 2) / 2)}</div>
 		</div>
 	)
 }
