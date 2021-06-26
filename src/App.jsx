@@ -54,6 +54,14 @@ const App = () => {
 		}
 	}
 
+	const makeWinMessage = state => {
+		return state.numRed > state.numBlue
+			? 'Red wins! Select a board size to start a new game.'
+			: state.numRed < state.numBlue
+			? 'Blue wins! Select a board size to start a new game.'
+			: 'Draw! Select a board size to start a new game.'
+	}
+
 	const checkGameOver = () => {
 		setBoard(prevBorad => ({
 			...prevBorad,
