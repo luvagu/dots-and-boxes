@@ -54,6 +54,31 @@ const App = () => {
 		}
 	}
 
+	const tint = e => {
+		const currentCoord = e.target.dataset.coord
+		if (board.lineCoordinates[currentCoord] === 0) {
+			e.target.style.backgroundColor = currentTurn === 'red' ? 'red' : 'blue'
+		}
+	}
+	
+	const untint = e => {
+		const currentCoord = e.target.dataset.coord
+		if (board.lineCoordinates[currentCoord] === 0) {
+			e.target.style.backgroundColor = 'white'
+		}
+	}
+	
+	const selectColor = int => {
+		switch (int) {
+			case 1:
+				return 'red'
+			case -1:
+				return 'blue'
+			default:
+				return 'white'
+		}
+	}
+	
 	const makeBoard = boardSize => {
 		const cols = []
 		for (let i = 0; i <= 2 * boardSize; i++) {
