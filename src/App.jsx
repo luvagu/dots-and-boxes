@@ -36,6 +36,12 @@ const boardSizes = [
 
 const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1)
 
+const BoardRows = ({ children, ...props }) => (
+	<div {...props} children={children} />
+)
+
+const BoardElement = ({ ...props }) => <div {...props} />
+
 const App = () => {
 	const [currentBoardSize, setCurrentBoardSize] = useState(boardSizes[0].size)
 	const [board, setBoard] = useState(boardBuilder(currentBoardSize))
@@ -46,6 +52,75 @@ const App = () => {
 			setCurrentBoardSize(boardSize)
 			setBoard(boardBuilder(boardSize))
 		}
+	}
+
+	const makeBoard = boardSize => {
+		const cols = []
+		for (let i = 0; i <= 2 * boardSize; i++) {
+			const rows = []
+			for (let j = 0; j <= 2 * boardSize; j++) {
+				let elementId
+				if (i % 2 === 0) {
+					if (j % 2 === 0) {
+						elementId = `dot${Math.floor(i / 2)},${Math.floor(j / 2)}`
+						rows.push(<BoardElement key={elementId} className='dot' />)
+					} else {
+						elementId = `0,${Math.floor(i / 2)},${Math.floor(j / 2)}`
+						rows.push(
+							<BoardElement
+								key={elementId}
+								data-coord={elementId}
+								className='horizontalLine'
+								style={{
+									backgroundColor: selectColor(
+										board.lineCoordinates[elementId]
+									),
+								}}
+								onClick={fillLine}
+								onMouseEnter={tint}
+								onMouseLeave={untint}
+							/>
+						)
+					}
+				} else {
+					if (j % 2 === 0) {
+						elementId = `1,${Math.floor(j / 2)},${Math.floor(i / 2)}`
+						rows.push(
+							<BoardElement
+								key={elementId}
+								data-coord={elementId}
+								className='verticalLine'
+								style={{
+									backgroundColor: selectColor(
+										board.lineCoordinates[elementId]
+									),
+								}}
+								onClick={fillLine}
+								onMouseEnter={tint}
+								onMouseLeave={untint}
+							/>
+						)
+					} else {
+						elementId = `box${Math.floor(i / 2)},${Math.floor(j / 2)}`
+						rows.push(
+							<BoardElement
+								key={elementId}
+								className='box'
+								style={{
+									backgroundColor:
+										board.boxColors[
+											`${Math.floor(i / 2)},${Math.floor(j / 2)}`
+										],
+								}}
+							/>
+						)
+					}
+				}
+			}
+			cols.push(<BoardRows key={i} className='row' children={rows} />)
+		}
+	
+		return <div key='game-board' children={cols} />
 	}
 
 	return (
