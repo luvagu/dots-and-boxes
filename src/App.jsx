@@ -54,6 +54,23 @@ const App = () => {
 		}
 	}
 
+	const checkSquare = (j, k) => {
+		const checker1 = Math.abs(board.lineCoordinates[`0,${j},${k}`])
+		const checker2 = Math.abs(
+			parseFloat(j) + 1 > board.boardSize
+				? 0
+				: board.lineCoordinates[`0,${parseFloat(j) + 1},${k}`]
+		)
+		const checker3 = Math.abs(board.lineCoordinates[`1,${k},${j}`])
+		const checker4 = Math.abs(
+			parseFloat(k) + 1 > board.boardSize
+				? 0
+				: board.lineCoordinates[`1,${parseFloat(k) + 1},${j}`]
+		)
+
+		return checker1 + checker2 + checker3 + checker4
+	}
+
 	const fillLine = e => {
 		const currentCoord = e.target.dataset.coord
 
