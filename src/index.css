@@ -1,4 +1,9 @@
+* {
+	box-sizing: border-box;
+}
+
 body {
+	padding: 0;
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
 		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -7,7 +12,92 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-		monospace;
+.conatiner {
+	display: flex;
+	flex-direction: column;
+	min-width: 640px;
+}
+
+header {
+	padding: 1rem 1.5rem;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: fit-content;
+	margin-bottom: 1rem;
+	background-color: black;
+	color: white;
+}
+
+.flex-item {
+	padding: 1rem 1.5rem;
+}
+
+.red {
+	background-color: red;
+}
+
+.blue {
+	background-color: blue;
+}
+
+button {
+	border: none;
+	border-left: 1px solid black;
+	cursor: pointer;
+	background-color: lightgray;
+}
+
+button.selected {
+	background-color: lightgreen;
+}
+
+.message {
+	text-align: center;
+	color: darkblue;
+	font-size: 1.2rem;
+	font-weight: bold;
+	margin-bottom: 1rem;
+}
+
+.board {
+	display: flex;
+	flex-direction: column;
+	padding: 1rem;
+	margin: 0 auto 1rem;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.dot {
+	height: 5px;
+	width: 5px;
+	background-color: black;
+}
+
+.box {
+	height: 30px;
+	width: 30px;
+}
+
+.horizontalLine {
+	height: 5px;
+	width: 30px;
+	border: 2px;
+	cursor: pointer;
+}
+
+.verticalLine {
+	height: 30px;
+	width: 5px;
+	border: 2px;
+	cursor: pointer;
 }
