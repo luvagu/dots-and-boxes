@@ -32,6 +32,8 @@ const boardSizes = [
 	{ size: 15, text: '15x15' },
 ]
 
+const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1)
+
 const App = () => {
 	return (
 		<div className='conatiner'>
