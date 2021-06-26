@@ -1,1 +1,1 @@
-# dots-and-boxes
+# React Dots & Boxes Game
