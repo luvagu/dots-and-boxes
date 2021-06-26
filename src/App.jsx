@@ -54,20 +54,108 @@ const App = () => {
 		}
 	}
 
+	const fillLine = e => {
+		const currentCoord = e.target.dataset.coord
+
+		if (board.lineCoordinates[currentCoord] === 0) {
+			e.target.style.backgroundColor = currentTurn
+			const lineCoordinates = board.lineCoordinates
+			lineCoordinates[currentCoord] = currentTurn === 'red' ? 1 : -1
+			setBoard(prevBoard => ({ ...prevBoard, lineCoordinates }))
+
+			const splitCoord = currentCoord.split(',')
+			const i = splitCoord[0]
+			const j = splitCoord[1]
+			const k = splitCoord[2]
+
+			let boxColors = board.boxColors
+			let madeSquare = 0
+
+			const boxBgColor = currentTurn === 'red' ? 'lightpink' : 'lightblue'
+
+			if (i === '0') {
+				if (checkSquare(j, k) === 4) {
+					madeSquare = 1
+					boxColors[`${j},${k}`] = boxBgColor
+					setBoard(prevBoard => ({
+						...prevBoard,
+						boxColors,
+						numBlue:
+							currentTurn === 'blue'
+								? prevBoard.numBlue + 1
+								: prevBoard.numBlue,
+						numRed:
+							currentTurn === 'red' ? prevBoard.numRed + 1 : prevBoard.numRed,
+					}))
+				}
+				if (checkSquare(parseFloat(j) - 1, k) === 4) {
+					madeSquare = 1
+					boxColors[`${parseFloat(j) - 1},${k}`] = boxBgColor
+					setBoard(prevBoard => ({
+						...prevBoard,
+						boxColors,
+						numBlue:
+							currentTurn === 'blue'
+								? prevBoard.numBlue + 1
+								: prevBoard.numBlue,
+						numRed:
+							currentTurn === 'red' ? prevBoard.numRed + 1 : prevBoard.numRed,
+					}))
+				}
+			} else {
+				if (checkSquare(k, j) === 4) {
+					madeSquare = 1
+					boxColors[`${k},${j}`] = boxBgColor
+					setBoard(prevBoard => ({
+						...prevBoard,
+						boxColors,
+						numBlue:
+							currentTurn === 'blue'
+								? prevBoard.numBlue + 1
+								: prevBoard.numBlue,
+						numRed:
+							currentTurn === 'red' ? prevBoard.numRed + 1 : prevBoard.numRed,
+					}))
+				}
+				if (checkSquare(k, parseFloat(j) - 1) === 4) {
+					madeSquare = 1
+					boxColors[`${k},${parseFloat(j) - 1}`] = boxBgColor
+					setBoard(prevBoard => ({
+						...prevBoard,
+						boxColors,
+						numBlue:
+							currentTurn === 'blue'
+								? prevBoard.numBlue + 1
+								: prevBoard.numBlue,
+						numRed:
+							currentTurn === 'red' ? prevBoard.numRed + 1 : prevBoard.numRed,
+					}))
+				}
+			}
+			if (madeSquare === 0) {
+				const nextTurn = currentTurn === 'red' ? 'blue' : 'red'
+				setBoard(prevBoard => ({ ...prevBoard, nextTurn }))
+				setcurrentTurn(nextTurn)
+			} else {
+				checkGameOver()
+			}
+		}
+	}
+
 	const tint = e => {
 		const currentCoord = e.target.dataset.coord
 		if (board.lineCoordinates[currentCoord] === 0) {
 			e.target.style.backgroundColor = currentTurn === 'red' ? 'red' : 'blue'
 		}
 	}
-	
+
 	const untint = e => {
 		const currentCoord = e.target.dataset.coord
 		if (board.lineCoordinates[currentCoord] === 0) {
 			e.target.style.backgroundColor = 'white'
 		}
 	}
-	
+
 	const selectColor = int => {
 		switch (int) {
 			case 1:
@@ -78,7 +166,7 @@ const App = () => {
 				return 'white'
 		}
 	}
-	
+
 	const makeBoard = boardSize => {
 		const cols = []
 		for (let i = 0; i <= 2 * boardSize; i++) {
@@ -144,7 +232,7 @@ const App = () => {
 			}
 			cols.push(<BoardRows key={i} className='row' children={rows} />)
 		}
-	
+
 		return <div key='game-board' children={cols} />
 	}
 
