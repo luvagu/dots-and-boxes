@@ -54,6 +54,18 @@ const App = () => {
 		}
 	}
 
+	const checkGameOver = () => {
+		setBoard(prevBorad => ({
+			...prevBorad,
+			winMessage:
+				prevBorad.numRed + prevBorad.numBlue === prevBorad.boardSize ** 2 ||
+				prevBorad.numRed > prevBorad.boardSize ** 2 / 2 ||
+				prevBorad.numBlue > prevBorad.boardSize ** 2 / 2
+					? makeWinMessage(prevBorad)
+					: '',
+		}))
+	}
+
 	const checkSquare = (j, k) => {
 		const checker1 = Math.abs(board.lineCoordinates[`0,${j},${k}`])
 		const checker2 = Math.abs(
