@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 const boardBuilder = boardSize => {
 	const state = {
 		boardSize,
@@ -35,6 +37,17 @@ const boardSizes = [
 const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1)
 
 const App = () => {
+	const [currentBoardSize, setCurrentBoardSize] = useState(boardSizes[0].size)
+	const [board, setBoard] = useState(boardBuilder(currentBoardSize))
+	const [currentTurn, setcurrentTurn] = useState(board.nextTurn)
+
+	const changeBoardSize = boardSize => {
+		if (window.confirm('Are you sure you would like to start a new game?')) {
+			setCurrentBoardSize(boardSize)
+			setBoard(boardBuilder(boardSize))
+		}
+	}
+
 	return (
 		<div className='conatiner'>
 			<header>
