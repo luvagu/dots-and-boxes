@@ -5,7 +5,7 @@ const boardBuilder = boardSize => {
 		boardSize,
 		numRed: 0,
 		numBlue: 0,
-		nextTurn: 'red',
+		// nextTurn: 'red',
 		winMessage: '',
 		lineCoordinates: {},
 		boxColors: {},
@@ -34,6 +34,11 @@ const boardSizes = [
 	{ size: 15, text: '15x15' },
 ]
 
+const getRandomPlayerTurn = () => {
+	const turns = ['red', 'blue']
+	return turns[Math.floor(Math.random() * turns.length)]
+}
+
 const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1)
 
 const BoardRows = ({ children, ...props }) => (
@@ -45,12 +50,13 @@ const BoardElement = ({ ...props }) => <div {...props} />
 const App = () => {
 	const [currentBoardSize, setCurrentBoardSize] = useState(boardSizes[0].size)
 	const [board, setBoard] = useState(boardBuilder(currentBoardSize))
-	const [currentTurn, setcurrentTurn] = useState(board.nextTurn)
+	const [currentTurn, setcurrentTurn] = useState(getRandomPlayerTurn())
 
 	const changeBoardSize = boardSize => {
 		if (window.confirm('Are you sure you would like to start a new game?')) {
 			setCurrentBoardSize(boardSize)
 			setBoard(boardBuilder(boardSize))
+			setcurrentTurn(getRandomPlayerTurn())
 		}
 	}
 
@@ -171,7 +177,6 @@ const App = () => {
 			}
 			if (madeSquare === 0) {
 				const nextTurn = currentTurn === 'red' ? 'blue' : 'red'
-				setBoard(prevBoard => ({ ...prevBoard, nextTurn }))
 				setcurrentTurn(nextTurn)
 			} else {
 				checkGameOver()
