@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Dots & Boxes Game",
+  "name": "React 2 Player Dots & Boxes Game by @luvagu",
   "icons": [
     {
       "src": "favicon.ico",
