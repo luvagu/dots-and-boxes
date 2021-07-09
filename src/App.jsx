@@ -283,21 +283,25 @@ const App = () => {
 			<header>
 				<h1>Dots &amp; Boxes</h1>
 				<div className='flex-container'>
-					<span className='flex-item'>Board size:</span>
-					{boardSizes.map(({ size, text }, idx) => (
-						<button
-							key={idx}
-							className={`flex-item ${
-								currentBoardSize === size ? 'selected' : ''
-							}`}
-							onClick={() => changeBoardSize(size)}
-						>
-							{text}
-						</button>
-					))}
-					<div className='flex-item'>Player&apos;s Score:</div>
-					<div className='flex-item red'>{board.numRed}</div>
-					<div className='flex-item blue'>{board.numBlue}</div>
+					<div className='flex-container'>
+						<div className='flex-item'>Board size:</div>
+						{boardSizes.map(({ size, text }, idx) => (
+							<button
+								key={idx}
+								className={`flex-item ${
+									currentBoardSize === size ? 'selected' : ''
+								}`}
+								onClick={() => changeBoardSize(size)}
+							>
+								{text}
+							</button>
+						))}
+					</div>
+					<div className='flex-container'>
+						<div className='flex-item'>Player&apos;s Score:</div>
+						<div className='flex-item red'>{board.numRed}</div>
+						<div className='flex-item blue'>{board.numBlue}</div>
+					</div>
 				</div>
 			</header>
 			<div className='message'>
@@ -306,7 +310,9 @@ const App = () => {
 					: `${capitalize(currentTurn)}'s turn`}
 			</div>
 			<div className='board'>{makeBoard(currentBoardSize)}</div>
-			<div className='min-score-txt'>Board min. score to win: {Math.ceil((board.boardSize ** 2) / 2)}</div>
+			<div className='min-score-txt'>
+				Board min. score to win: {Math.floor(board.boardSize ** 2 / 2) + 1}
+			</div>
 		</div>
 	)
 }
